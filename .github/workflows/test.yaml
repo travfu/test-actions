@@ -1,7 +1,5 @@
 name: Test Actions
-run-name: ${{ github.actor }} is running test 🧪
-on:
-  push
+on: push
 
 jobs:
   Get-Paths:
