@@ -16,8 +16,8 @@ jobs:
             backend:
               - 'backend/**'
 
-      - if: steps.changes.outputs.frontend == 'true':
+      - if: steps.changes.outputs.frontend == 'true'
         run: echo frontend
 
-      - if: steps.changes.outputs.backend == 'true':
+      - if: steps.changes.outputs.backend == 'true'
         run: echo backend
