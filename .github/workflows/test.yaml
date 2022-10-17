@@ -14,8 +14,10 @@ jobs:
           filters: |
             frontend:
               - 'frontend/**'
+              - './frontend.json'
             backend:
               - 'backend/**'
+                './backend.json'
 
       - if: steps.changes.outputs.frontend == 'true'
         run: echo frontend
