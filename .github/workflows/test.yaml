@@ -31,6 +31,6 @@ jobs:
   Test-Backend:
     runs-on: ubuntu-latest
     needs: Get-Paths
+    if: needs.Get-Paths.outputs.backend-changed == 'true'
     steps:
-      - if: needs.Get-Paths.outputs.backend-changed == 'true'
-        run: echo backend
+      - run: echo backend
