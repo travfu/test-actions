@@ -1,0 +1,23 @@
+name: Test Actions
+run-name: ${{ github.actor }} is running test 🧪
+on:
+  push
+
+jobs:
+  Get-Paths:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            frontend:
+              - 'frontend/**'
+            backend:
+              - 'backend/**'
+
+      - if: steps.changes.outputs.frontend == 'true':
+        run: echo frontend
+
+      - if: steps.changes.outputs.backend == 'true':
+        run: echo backend
