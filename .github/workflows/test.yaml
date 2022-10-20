@@ -30,6 +30,7 @@ jobs:
           list-files: "shell"
 
       - name: Get paths to changed frontend files
+        if: steps.changes.outputs.backend-changed == 'true'
         id: changed-files
         uses: tj-actions/changed-files@v32
         with:
