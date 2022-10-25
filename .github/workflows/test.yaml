@@ -33,6 +33,10 @@ jobs:
 
       - run: echo "${{ github.sha }}"
       - run: echo "${{ github.event.pull_request.base.sha }}"
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
 
       - name: Get paths to changed frontend files
         if: steps.changes.outputs.frontend == 'true'
