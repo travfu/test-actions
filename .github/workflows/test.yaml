@@ -31,7 +31,8 @@ jobs:
               - './backend.json'
           list-files: "shell"
 
-      - run: echo "{{ github.sha }}"
+      - run: echo "${{ github.sha }}"
+      - run: echo "${{ github.head_ref }}"
 
       - name: Get paths to changed frontend files
         if: steps.changes.outputs.frontend == 'true'
