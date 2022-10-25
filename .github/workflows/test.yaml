@@ -31,6 +31,8 @@ jobs:
               - './backend.json'
           list-files: "shell"
 
+      - run: echo "{{ github.sha }}"
+
       - name: Get paths to changed frontend files
         if: steps.changes.outputs.frontend == 'true'
         id: changed-files
