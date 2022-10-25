@@ -32,7 +32,7 @@ jobs:
           list-files: "shell"
 
       - run: echo "${{ github.sha }}"
-      - run: echo "${{ github.head_ref }}"
+      - run: echo "${{ github.event.pull_request.base.sha }}"
 
       - name: Get paths to changed frontend files
         if: steps.changes.outputs.frontend == 'true'
