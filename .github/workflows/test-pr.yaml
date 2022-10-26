@@ -4,4 +4,8 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - run: echo HELLO
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: dump github context
+        run: echo "${{ toJSON(github) }}"
