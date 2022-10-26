@@ -17,3 +17,5 @@ jobs:
           base_sha: ${{ github.event.pull_request.base.sha }}
           files: |
             frontend/src/**
+
+      - run: echo "${{ steps.changed-files.outputs.added_files }}"
