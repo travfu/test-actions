@@ -19,3 +19,6 @@ jobs:
             frontend/src/**
 
       - run: echo "${{ steps.changed-files.outputs.added_files }}"
+
+      - if: steps.changed-files.outputs.added_files
+        run: echo FILES CHANGED
