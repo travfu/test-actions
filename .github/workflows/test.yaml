@@ -1,5 +1,7 @@
 name: Test Actions
-on: push
+on:
+  push:
+    branches: ["*"]
 
 jobs:
   Get-Paths:
