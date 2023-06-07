@@ -1,7 +1,7 @@
 name: ubuntu-latest test
-on:
-  push:
-    branches: ["*"]
+on: push
+  # push:
+    # branches: ["*"]
 
 
 jobs:
