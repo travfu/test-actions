@@ -1,8 +1,9 @@
 name: Test Actions
 on:
   push:
-    branches:
-      - *
+    paths-ignore:
+      - "README.rst"
+      - "docs/**"
 
 jobs:
   Get-Paths:
