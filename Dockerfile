@@ -39,13 +39,15 @@ RUN apt-get update \
 RUN addgroup --system django \
   && adduser --system --ingroup django django
 
-COPY --chown=django:django . /app
+COPY pyproject.toml poetry.lock ./app/
 WORKDIR /app
 
 # Requirements are installed here to ensure they will be cached.
 RUN pip install --constraint=./.github/workflows/constraints.txt poetry
 RUN poetry config virtualenvs.create false
-RUN poetry install
+RUN poetry install \
+  # skip installing project source to avoid cache invalidation on project file change
+  --no-root --no-directory
 
 RUN python --version
 
