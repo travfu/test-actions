@@ -47,6 +47,8 @@ RUN pip install --constraint=./.github/workflows/constraints.txt poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install
 
+RUN python --version
+
 # COPY ./compose/local/django/celery/worker/start /start-celeryworker
 # RUN sed -i 's/\r$//g' /start-celeryworker
 # RUN chmod +x /start-celeryworker
