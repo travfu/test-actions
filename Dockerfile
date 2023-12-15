@@ -42,11 +42,8 @@ RUN addgroup --system django \
 COPY pyproject.toml poetry.lock .github/workflows/constraints.txt /app/
 WORKDIR /app
 
-RUN ls
-RUN ls ./github/workflows
-
 # Requirements are installed here to ensure they will be cached.
-RUN pip install --constraint=./.github/workflows/constraints.txt poetry
+RUN pip install --constraint=constraints.txt poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install \
   # skip installing project source to avoid cache invalidation on project file change
