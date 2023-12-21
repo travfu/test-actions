@@ -1,0 +1,26 @@
+name: tests
+
+env:
+  DOCKER_BUILDKIT: 1
+  COMPOSE_DOCKER_CLI_BUILD: 1
+
+on: push
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/cache@v3
+        with:
+          key: poetry-${{ hashFiles('poetry.lock') }}
+          path: ~/.cache/pypoetry
+
+      - name: 🔨 build
+        run: docker-compose build
+
+      - name: teardown
+        run: docker-compose down
