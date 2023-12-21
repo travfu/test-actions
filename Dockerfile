@@ -39,11 +39,17 @@ RUN apt-get update \
 RUN addgroup --system django \
   && adduser --system --ingroup django django
 
-COPY pyproject.toml poetry.lock .github/workflows/constraints.txt /app/
+# COPY pyproject.toml poetry.lock .github/workflows/constraints.txt /app/
+COPY . /app
 WORKDIR /app
 
+RUN ls
+
 # Requirements are installed here to ensure they will be cached.
-RUN pip install --constraint=constraints.txt poetry
+RUN pip install \
+  --constraint=.github/workflows/constraints.txt \
+  # --constraint=constraints.txt \
+  poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install \
   # skip installing project source to avoid cache invalidation on project file change

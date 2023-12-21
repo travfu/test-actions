@@ -14,6 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - uses: actions/cache@v3
+        with:
+          key: poetry-${{ hashFiles('poetry.lock') }}
+          path: ~/.cache/pypoetry
+
       - name: 🔨 build
         run: docker-compose build
 
