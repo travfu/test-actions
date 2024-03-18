@@ -1,0 +1,41 @@
+name: Release
+on:
+  workflow_dispatch
+  # inputs:
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "no-op"
+        run: echo "NO-OP"
+
+  Deploy-Dev:
+    runs-on: ubuntu-latest
+    needs: Build
+    environment:
+      name: "dev"
+      url: "https://github.com"
+    steps:
+      - name: "no-op"
+        run: echo "NO-OP"
+
+  Deploy-Staging:
+    runs-on: ubuntu-latest
+    needs: Deploy-Dev
+    environment:
+      name: "staging"
+      url: "https://github.com"
+    steps:
+      - name: "no-op"
+        run: echo "NO-OP"
+
+  Deploy-Prod:
+    runs-on: ubuntu-latest
+    needs: Deploy-Staging
+    environment:
+      name: "prod"
+      url: "https://github.com"
+    steps:
+      - name: "no-op"
+        run: echo "NO-OP"
