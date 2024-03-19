@@ -12,11 +12,22 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get version
+      - id: get-version
+        name: Get version
         run: |
           version=$(cat pyproject.toml | grep -m 1 "^version =" | awk '{print $3}' | sed 's/"//g')
-          echo "Version: [$version]"
+          echo "Version: $version"
           echo "version=$version" >> $GITHUB_OUTPUT
+
+      - name: Check if version tag exists
+        run: |
+          TAG="${{ steps.get-version.outputs.version }}"
+          if [ $(git tag -l $TAG) ]; then
+            echo "Tag $TAG exists"
+            echo "tag_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "Tag $TAG does not exist"
+            echo "tag_exists=false" >> $GITHUB_OUTPUT
 
   # Deploy-Dev:
   #   runs-on: ubuntu-latest
