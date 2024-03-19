@@ -28,6 +28,7 @@ jobs:
           else
             echo "Tag $TAG does not exist"
             echo "tag_exists=false" >> $GITHUB_OUTPUT
+          fi
 
   # Deploy-Dev:
   #   runs-on: ubuntu-latest
