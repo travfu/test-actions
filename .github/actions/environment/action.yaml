@@ -1,0 +1,9 @@
+name: Print env var
+runs:
+  using: "composite"
+  steps:
+    - name: Print Environment Variable
+      shell: bash
+      run: echo $ENV_NAME
+      env:
+        ENV_NAME: ${{ vars.ENVIRONMENT_NAME }}

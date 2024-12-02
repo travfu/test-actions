@@ -40,3 +40,14 @@ jobs:
       - uses: ./.github/actions/filesystem
         with:
           filepath: hello.txt
+
+  environment:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/environment
