@@ -24,3 +24,19 @@ jobs:
         run: echo $OUTPUT
         env:
           OUTPUT: ${{ steps.hello.outputs.hello }}
+
+  filesystem:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate file
+        shell: bash
+        run: echo "HELLO WORLD" >> hello.txt
+
+      - uses: ./.github/actions/filesystem
+        with:
+          filepath: hello.txt
