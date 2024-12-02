@@ -1,0 +1,26 @@
+name: Test composite actions
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  simple:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Hello
+        id: hello
+        uses: ./.github/actions/hello
+        with:
+          who-to-greet: 'Octocat'
+
+      - name: "Debug: Hello"
+        shell: bash
+        run: echo $OUTPUT
+        env:
+          OUTPUT: ${{ steps.hello.outputs.hello }}

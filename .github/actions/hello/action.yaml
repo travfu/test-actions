@@ -1,0 +1,20 @@
+name: 'Hello World'
+description: 'Greet someone'
+inputs:
+  who-to-greet:
+    description: 'Who to greet'
+    required: true
+    default: 'World'
+outputs:
+  hello:
+    description: "Hello output"
+    value: ${{ steps.hello.outputs.hello }}
+runs:
+  using: "composite"
+  steps:
+    - name: Set Greeting
+      id: hello
+      shell: bash
+      run: echo "hello=$(echo Hello $INPUT_WHO_TO_GREET.)" >> $GITHUB_OUTPUT
+      env:
+        INPUT_WHO_TO_GREET: ${{ inputs.who-to-greet }}
