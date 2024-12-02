@@ -1,0 +1,14 @@
+name: Print Filecontents
+description: Echo contents of file
+inputs:
+  filepath:
+    description: path of file
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Echo contents
+      shell: bash
+      run: cat $FILEPATH
+      env:
+        FILEPATH: ${{ inputs.filepath }}
