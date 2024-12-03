@@ -1,5 +1,11 @@
 name: Test Actions
-on: push
+on:
+  push:
+    branches:
+      - "**"
+    paths-ignore:
+      - "README.rst"
+      - "docs/**"
 
 jobs:
   Get-Paths:
@@ -11,8 +17,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
 
       - uses: dorny/paths-filter@v2
         id: changes
@@ -31,17 +35,10 @@ jobs:
               - './backend.json'
           list-files: "shell"
 
-      - run: echo "${{ github.sha }}"
-      - run: echo "${{ github.event.pull_request.base.sha }}"
-      - name: Dump GitHub context
-        run: echo "${{ toJSON(github) }}"
-
       - name: Get paths to changed frontend files
-        if: steps.changes.outputs.frontend == 'true'
         id: changed-files
         uses: tj-actions/changed-files@v32
         with:
-          since_last_remote_commit: true
           files: |
             frontend/src/**
 
