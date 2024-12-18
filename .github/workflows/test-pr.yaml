@@ -1,0 +1,24 @@
+on: pull_request
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: dump github context
+        run: echo "${{ toJSON(github) }}"
+
+      - name: Get paths to changed frontend files
+        id: changed-files
+        uses: tj-actions/changed-files@v32
+        with:
+          base_sha: ${{ github.event.pull_request.base.sha }}
+          files: |
+            frontend/src/**
+
+      - run: echo "${{ steps.changed-files.outputs.added_files }}"
+
+      - if: steps.changed-files.outputs.added_files
+        run: echo "FILES CHANGED - ${{ steps.changed-files.outputs.added_files }}"
