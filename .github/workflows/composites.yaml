@@ -51,3 +51,15 @@ jobs:
           fetch-depth: 0
 
       - uses: ./.github/actions/environment
+
+  version-bump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Bump version
+        uses: ./.github/actions/bump-version
+        with:
+          gradle-path: build.gradle.kts
+          version-code: 111
