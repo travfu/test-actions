@@ -22,7 +22,7 @@ runs:
     - name: Bump versionCode
       shell: bash
       run: |
-        sed -i "s/versionCode [0-9]\+/versionCode ${{ inputs.version-code }}/g" ${{ inputs.gradle-path }}
+        sed -i "s/versionCode = [0-9]\+/versionCode = ${{ inputs.version-code }}/g" ${{ inputs.gradle-path }}
 
     - name: Debug - after
       shell: bash
