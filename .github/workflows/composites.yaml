@@ -1,8 +1,6 @@
 name: Test composite actions
 on:
-  push:
-    branches:
-      - master
+  push
 
 jobs:
   simple:
