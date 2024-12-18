@@ -11,10 +11,26 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Debug - before
+      shell: bash
+      run: |
+        versionCode=$(grep "versionCode" ${{ inputs.gradle-path }} | awk -F"= " '{print $2}' | tr -d " ")
+        versionName=$(grep "versionName" ${{ inputs.gradle-path }} | awk -F"= " '{print $2}' | tr -d " \"")
+        echo "versionCode=$versionCode"
+        echo "versionName=$versionName"
+
     - name: Bump versionCode
       shell: bash
       run: |
         sed -i "s/versionCode [0-9]\+/versionCode ${{ inputs.version-code }}/g" ${{ inputs.gradle-path }}
+
+    - name: Debug - after
+      shell: bash
+      run: |
+        versionCode=$(grep "versionCode" ${{ inputs.gradle-path }} | awk -F"= " '{print $2}' | tr -d " ")
+        versionName=$(grep "versionName" ${{ inputs.gradle-path }} | awk -F"= " '{print $2}' | tr -d " \"")
+        echo "versionCode=$versionCode"
+        echo "versionName=$versionName"
 
     - name: Configure Waypoint Bot git user
       shell: bash
