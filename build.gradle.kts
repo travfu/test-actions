@@ -54,7 +54,7 @@ android {
 
     defaultConfig {
         applicationId = "com.correla.waypoint"
-        versionCode = 129
+        versionCode = 111
         versionName = "0.0.6"
 
         testInstrumentationRunner = "com.correla.waypoint.core.testing.WaypointTestRunner"
