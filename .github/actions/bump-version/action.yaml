@@ -1,0 +1,30 @@
+name: Update Version
+description: Update gradle version code and commit/push it
+inputs:
+  gradle-path:
+    description: File path to the build.gradle file that contains versionCode
+    required: true
+  version-code:
+    description: New versionCode value
+    required: true
+    
+runs:
+  using: "composite"
+  steps:
+    - name: Bump versionCode
+      shell: bash
+      run: |
+        sed -i "s/versionCode [0-9]\+/versionCode ${{ inputs.version-code }}/g" ${{ inputs.gradle-path }}
+
+    - name: Configure Waypoint Bot git user
+      shell: bash
+      run: |
+        git config user.email "waypoint.bot@correla.com"
+        git config user.name "Waypoint Bot"
+
+    - name: Commit and push change
+      shell: bash
+      run: |
+        git commit -m "chore: bump version code to ${{ inputs.version-code }}" ${{ inputs.gradle-path }}
+        git push origin HEAD
+
